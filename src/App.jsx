@@ -9,7 +9,6 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Wrap routes with MainLayout */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="/attendence" element={<ComingSoon/>} />

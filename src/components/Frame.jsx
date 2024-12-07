@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const Frame = () => {
   return (
-    <main className="min-w-0 flex-1 overflow-auto bg-gray-100 thin-scrollbar"><Outlet/></main>
+    <main className="min-w-0 flex-1 overflow-y-auto bg-gray-100 thin-scrollbar"><Outlet/></main>
   );
 };
 

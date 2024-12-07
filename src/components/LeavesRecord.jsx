@@ -3,10 +3,22 @@ import { leaveLog, attendanceLog } from "../Info/Info";
 
 const LeavesRecord = () => {
   const [selected, setSelected] = useState("LeaveLog");
+  const [showAll, setShowAll] = useState(false);
+
+  // Number of logs to display initially
+  const initialCount = 5;
+
+  // Determine which log list to show
+  const getLogsToDisplay = () => {
+    const logs = selected === "LeaveLog" ? leaveLog : attendanceLog;
+    return showAll ? logs : logs.slice(0, initialCount);
+  };
 
   const renderTableContent = () => {
+    const logsToDisplay = getLogsToDisplay();
+
     if (selected === "LeaveLog") {
-      return leaveLog.map((log, index) => (
+      return logsToDisplay.map((log, index) => (
         <tr
           key={index}
           className={`${
@@ -34,7 +46,7 @@ const LeavesRecord = () => {
         </tr>
       ));
     } else if (selected === "AttendanceLog") {
-      return attendanceLog.map((log, index) => (
+      return logsToDisplay.map((log, index) => (
         <tr
           key={index}
           className={`${
@@ -63,8 +75,11 @@ const LeavesRecord = () => {
     }
   };
 
+  const handleViewMore = () => setShowAll(!showAll);
+
   return (
-    <div className="w-[59vw] h-[59.5vh] flex flex-col bg-white border border-slate-200 rounded-md p-4 gap-2">
+    <div className="w-[calc(100vw-16rem)] h-[calc(100vh-41vh)] flex flex-col bg-white border border-slate-200 rounded-md p-4 gap-2">
+      {/* Toggle Buttons */}
       <div className="p-1 w-72 flex items-center gap-1 bg-slate-100 rounded-md text-sm font-medium">
         <button
           className={`px-3 py-2 w-36 rounded-md ${
@@ -72,7 +87,10 @@ const LeavesRecord = () => {
               ? "bg-white text-black"
               : "bg-slate-100 text-gray-800"
           }`}
-          onClick={() => setSelected("AttendanceLog")}
+          onClick={() => {
+            setSelected("AttendanceLog");
+            setShowAll(false); // Reset view state when switching logs
+          }}
         >
           Attendance Log
         </button>
@@ -82,13 +100,17 @@ const LeavesRecord = () => {
               ? "bg-white text-black"
               : "bg-slate-100 text-gray-800"
           }`}
-          onClick={() => setSelected("LeaveLog")}
+          onClick={() => {
+            setSelected("LeaveLog");
+            setShowAll(false); // Reset view state when switching logs
+          }}
         >
           Leave Log
         </button>
       </div>
 
-      <div className="bg-slate-100 border border-slate-200 rounded-md max-h-80 overflow-y-auto thin-scrollbar">
+      {/* Log Table */}
+      <div className="bg-slate-100 border border-slate-200 rounded-md max-h-[44vh] overflow-y-auto thin-scrollbar">
         <table className="w-full border-collapse">
           <thead className="sticky top-0 bg-slate-100 text-black z-10">
             <tr>
@@ -116,8 +138,12 @@ const LeavesRecord = () => {
         </table>
       </div>
 
-      <div className="text-black underline underline-offset-4 text-center text-sm cursor-pointer mt-2">
-        View More
+      {/* View More */}
+      <div
+        className="text-black underline underline-offset-4 text-center text-sm cursor-pointer m-auto"
+        onClick={handleViewMore}
+      >
+        {showAll ? "View Less" : "View More"}
       </div>
     </div>
   );

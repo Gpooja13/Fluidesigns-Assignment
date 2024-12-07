@@ -53,7 +53,7 @@ export default function SideBar() {
                     onClick={() => setSelected(menuItems[index])}
                     className={`h-[9vh] flex items-center justify-start text-lg rounded-md hover:bg-slate-100 ${
                       selected.title === item.title
-                        ? "font-semibold bg-slate-200 hover:bg-slate-200"
+                        ? " bg-slate-200 hover:bg-slate-200"
                         : ""
                     }`}
                   >
@@ -73,6 +73,7 @@ export default function SideBar() {
                 <span className="m-3 text-[16px]">Help</span>
               </li>
             </Link>
+            <hr/>
             <Link>
               <li className="h-[9vh] flex items-center justify-start text-lg rounded-md hover:bg-slate-100">
                 <span className="ml-4 text-2xl">

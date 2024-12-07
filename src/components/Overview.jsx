@@ -3,23 +3,24 @@ import { overviewDetails } from "../Info/Info";
 
 const Overview = () => {
   return (
-    <main className="h-[33vh] w-[79vw] bg-white border border-slate-200 rounded-md p-4 gap-2 flex items-center flex-col">
+    <main className="h-[33vh] w-[calc(100vw-18rem)] bg-white border border-slate-200 rounded-md p-4 gap-2 flex items-center flex-col">
       <div className="flex justify-between items-center w-full h-1/2">
         <div className="flex items-start gap-6">
           <div>
             <img
               src="/profilePic.webp"
               alt="profile-pic"
-              className="h-[10vh]  rounded-full"
+              className="h-[10vh] rounded-full"
+              style={{ width: "10vh", height: "10vh" }}
             />
-            <figure className="rounded-full w-[1vw] h-[1vw] relative left-12 bottom-4"></figure>
+            <figure className="rounded-full w-[1vw] h-[1vw] relative left-12 bg-green-500 bottom-4"></figure>
           </div>
-          <div className="flex flex-col justify-between h-full gap-2">
-            <span className="font-semibold text-2xl text-black">Rebbecca</span>
-            <span className="text-gray-500 text-sm">rebbecca@fluidesigns.in</span>
+          <div className="flex flex-col justify-between h-full gap-3">
+            <h2 className="font-semibold text-3xl text-[#0F172A]">Rebbecca</h2>
+            <span className="text-slate-600 text-sm">rebbecca@fluidesigns.in</span>
           </div>
         </div>
-        <div className="flex flex-col items-end h-full gap-3">
+        <div className="flex flex-col justify-between items-end h-full gap-3">
           <div className="flex items-center gap-4">
             <button className="bg-white rounded-md w-auto py-2 px-4 font-medium border text-sm text-black">
               Apply Leave
@@ -39,7 +40,7 @@ const Overview = () => {
           return (
             <div key={idx} className={`flex flex-col w-1/5 h-full justify-between ${idx!==Object.entries(overviewDetails).length-1?"border-r":""}  border-slate-200 p-2 text-black`}>
               <span>{key}</span>
-              <span className="font-semibold text-xl">{value}</span>
+              <span className="font-semibold text-[3vh]">{value}</span>
             </div>
           );
         })}
